@@ -140,8 +140,14 @@ function Contacts() {
                     message: message,
                 };
 
-                axios.post(contactsData.sheetAPI, responseData).then((res) => {
-                    console.log('success');
+                // If sheetAPI is not configured, fallback to opening user's email client via mailto
+                if (!contactsData.sheetAPI) {
+                    const subject = encodeURIComponent(`Contact from ${name}`);
+                    const body = encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\n${message}`);
+                    const mailto = `mailto:${contactsData.email}?subject=${subject}&body=${body}`;
+                    // open mail client
+                    window.location.href = mailto;
+
                     setSuccess(true);
                     setErrMsg('');
 
@@ -149,7 +155,26 @@ function Contacts() {
                     setEmail('');
                     setMessage('');
                     setOpen(false);
-                });
+                    return;
+                }
+
+                axios
+                    .post(contactsData.sheetAPI, responseData)
+                    .then((res) => {
+                        console.log('success');
+                        setSuccess(true);
+                        setErrMsg('');
+
+                        setName('');
+                        setEmail('');
+                        setMessage('');
+                        setOpen(false);
+                    })
+                    .catch((err) => {
+                        console.error('contact submit error', err);
+                        setErrMsg('Failed to send message. Please try again or use the email link.');
+                        setOpen(true);
+                    });
             } else {
                 setErrMsg('Invalid email');
                 setOpen(true);
