@@ -1,4 +1,3 @@
-import resume from '../assets/pdf/resume.pdf';
 import profileImg from '../assets/png/Official Picture.jpg';
 
 export const headerData = {
@@ -6,5 +5,6 @@ export const headerData = {
     title: 'Full Stack Software Developer',
     description: 'Motivated and self-driven engineer focused on secure, reliable systems and continuous learning.',
     image: profileImg,
-    resumePdf: resume
+    // Google Drive resume link (open in new tab)
+    resumePdf: 'https://drive.google.com/file/d/1BB-T1o0owDiMuYKGKejKoheK5TUHSOaN/view?usp=sharing'
 };

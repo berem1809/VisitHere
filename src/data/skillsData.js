@@ -7,13 +7,26 @@
     'Next JS',
     'Node JS',
     'MongoDB',
+    'Spring Boot',
     'MySQL',
+    'PostgreSQL',
+    'HTML',
+    'CSS',
+    'TailwindCSS',
     'AWS',
     'Docker',
     'Kubernetes',
     'MaterialUI',
     'Git',
-    'Firebase'
+    'Firebase',
+    'DynamoDB',
+    'ExpressJS',
+    'Flutter',
+    'ViteJS',
+    'AWS EC2',
+    'AWS S3',
+    'AWS Lambda',
+    'OpenAI ',
 ]
 
 // Choose your skills from below. Make sure it's in the same format and spelled correctly.

@@ -1,12 +1,15 @@
-import React from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import { FaPlay, FaCode } from 'react-icons/fa';
+import { FaCode, FaGithub, FaTimes } from 'react-icons/fa';
 import Fade from 'react-reveal/Fade';
 
 import placeholder from '../../../assets/png/placeholder.png';
 import './SingleProject.css';
 
 function SingleProject({ id, name, desc, tags, code, demo, image, theme }) {
+    const [open, setOpen] = useState(false);
+    const cardRef = useRef(null);
+
     const useStyles = makeStyles((t) => ({
         iconBtn: {
             display: 'flex',
@@ -30,15 +33,48 @@ function SingleProject({ id, name, desc, tags, code, demo, image, theme }) {
             transition: 'all 0.2s',
             '&:hover': {},
         },
+        iconBtnMuted: {
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            width: 40,
+            height: 40,
+            borderRadius: 50,
+            border: `2px dashed ${theme.tertiary80}`,
+            color: theme.tertiary80,
+            opacity: 0.6,
+            cursor: 'not-allowed',
+        }
     }));
 
     const classes = useStyles();
 
+    // close when clicking outside or pressing Escape (supports touch)
+    useEffect(() => {
+        function handleOutside(e) {
+            if (cardRef.current && !cardRef.current.contains(e.target)) {
+                setOpen(false);
+            }
+        }
+        function handleKey(e) {
+            if (e.key === 'Escape') setOpen(false);
+        }
+        document.addEventListener('mousedown', handleOutside);
+        document.addEventListener('touchstart', handleOutside);
+        document.addEventListener('keydown', handleKey);
+        return () => {
+            document.removeEventListener('mousedown', handleOutside);
+            document.removeEventListener('touchstart', handleOutside);
+            document.removeEventListener('keydown', handleKey);
+        };
+    }, []);
+
     return (
         <Fade bottom>
             <div
+                ref={cardRef}
                 key={id}
-                className='singleProject'
+                className={`singleProject ${open ? 'open' : ''}`}
                 style={{ backgroundColor: theme.primary400 }}
             >
                 <div className='projectContent'>
@@ -50,60 +86,72 @@ function SingleProject({ id, name, desc, tags, code, demo, image, theme }) {
                     </h2>
                     <img src={image ? image : placeholder} alt={name} />
                     <div className='project--showcaseBtn'>
-                        <a
-                            href={demo}
-                            target='_blank'
-                            rel='noreferrer'
+
+
+                        {/* Toggle details (</> icon). This only toggles the description and tags */}
+                        <button
                             className={classes.iconBtn}
-                            aria-labelledby={`${name
-                                .replace(' ', '-')
-                                .toLowerCase()} ${name
-                                .replace(' ', '-')
-                                .toLowerCase()}-demo`}
-                        >
-                            <FaPlay
-                                id={`${name
-                                    .replace(' ', '-')
-                                    .toLowerCase()}-demo`}
-                                className={classes.icon}
-                                aria-label='Demo'
-                            />
-                        </a>
-                        <a
-                            href={code}
-                            target='_blank'
-                            rel='noreferrer'
-                            className={classes.iconBtn}
-                            aria-labelledby={`${name
-                                .replace(' ', '-')
-                                .toLowerCase()} ${name
-                                .replace(' ', '-')
-                                .toLowerCase()}-code`}
+                            title='Show details'
+                            onClick={() => setOpen((s) => !s)}
+                            aria-expanded={open}
+                            aria-controls={`${name.replace(' ', '-').toLowerCase()}-details`}
                         >
                             <FaCode
                                 id={`${name
                                     .replace(' ', '-')
-                                    .toLowerCase()}-code`}
+                                    .toLowerCase()}-toggle`}
                                 className={classes.icon}
-                                aria-label='Code'
+                                aria-label='Toggle details'
                             />
-                        </a>
+                        </button>
+
+                        {/* Github icon - opens repo in new tab (only if code link exists) */}
+                        {code ? (
+                            <a
+                                href={code}
+                                target='_blank'
+                                rel='noreferrer'
+                                className={classes.iconBtn}
+                                aria-label='GitHub Repo'
+                            >
+                                <FaGithub className={classes.icon} />
+                            </a>
+                        ) : (
+                            <div className={classes.iconBtnMuted} title='No repository available' aria-hidden='true'>
+                                <FaGithub className={classes.icon} />
+                            </div>
+                        )}
                     </div>
                 </div>
-                <p
+
+                {/* details: hidden unless `open` */}
+                <div
+                    id={`${name.replace(' ', '-').toLowerCase()}-details`}
                     className='project--desc'
+                    role='region'
+                    aria-hidden={!open}
                     style={{
                         background: theme.secondary,
                         color: theme.tertiary,
+                        display: open ? 'block' : 'none'
                     }}
                 >
-                    {desc}
-                </p>
+                    <button
+                        className='project--closeBtn'
+                        aria-label='Close details'
+                        onClick={() => setOpen(false)}
+                    >
+                        <FaTimes />
+                    </button>
+                    <div className='project--descContent'>{desc}</div>
+                </div>
+
                 <div
                     className='project--lang'
                     style={{
                         background: theme.secondary,
                         color: theme.tertiary80,
+                        display: open ? 'flex' : 'none'
                     }}
                 >
                     {tags.map((tag, id) => (

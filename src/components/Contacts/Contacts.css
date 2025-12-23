@@ -153,8 +153,12 @@
     line-height: 110%;
     font-weight: 500;
     font-family: var(--primaryFont);
-    width: 45%;
-    word-break: break-word;
+    width: auto; /* allow natural width */
+    max-width: 100%;
+    white-space: nowrap; /* keep in single line on larger screens */
+    overflow: hidden; /* prevent overflow layout shifts */
+    text-overflow: ellipsis; /* show ellipsis if it doesn't fit */
+    word-break: normal;
 }
 
 .socialmedia-icons {
@@ -248,6 +252,10 @@
     .personal-details p {
         margin-left: 1.2rem;
         width: 95%;
+        white-space: normal; /* allow wrapping on small screens */
+        overflow: visible;
+        text-overflow: unset;
+        word-break: break-word;
     }
 }
 

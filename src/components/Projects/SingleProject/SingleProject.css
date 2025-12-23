@@ -1,7 +1,7 @@
 .singleProject {
     box-shadow: 4px 4px 8px rgba(36, 3, 3, 0.2);
-    width: 304px;
-    height: 360px;
+    width: 404px;
+    height: 390px;
     border-radius: 10px;
     display: flex;
     flex-direction: column;
@@ -9,7 +9,7 @@
     justify-content: center;
     padding: 1.4rem 2rem;
     position: relative;
-    cursor: pointer;
+    cursor: default;
     overflow: hidden;
 }
 
@@ -17,27 +17,37 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: space-between;
+    justify-content: flex-start;
     width: 100%;
     height: 100%;
+    gap: 0.5rem;
 }
 
 .projectContent > h2 {
     font-family: var(--primaryFont);
     font-style: normal;
     font-weight: 600;
-    font-size: 1.525rem;
-    line-height: 110%;
+    font-size: 1.45rem;
+    line-height: 1.1;
     text-align: center;
+    margin: 0 0 0.5rem 0;
+    /* clamp title to two lines to avoid overflow */
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    word-break: break-word;
 }
 
 .projectContent > img {
     width: 100%;
     height: 60%;
+    object-fit: contain;
     transition: opacity 0.7s 0.3s;
 }
 
-.singleProject:hover img{
+.singleProject.open img{
     opacity: 0;
 }
 
@@ -54,38 +64,75 @@
     transition: transform 0.5s 0.3s;
 }
 
-.singleProject:hover .project--showcaseBtn a:nth-child(2) {
-    transform: translateX(-140px) scale(1.1) !important;
-}
+
 
 
 .singleProject .project--desc{
     position: absolute;
-    width: 95%;
-    height: 160px;
-    left: 0;
-    top: 0;
-    transform: translate(-110%,40%);
-    padding: 15px;
-    border-radius: 0 20px 20px 0;
-    transition: transform 0.9s;
-    line-height: 110%;
+    width: 62%;
+    max-height: calc(100% - 70px);
+    left: -120%; /* hide off-canvas from the left */
+    top: 18%;
+    padding: 18px 20px 18px 20px;
+    border-radius: 10px 20px 20px 10px;
+    transition: left 0.45s ease, opacity 0.35s ease;
+    line-height: 1.3;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: flex-start;
+    font-family: var(--primaryFont);
+    background: inherit; /* theme applied inline on element */
+    opacity: 0;
+    pointer-events: none;
+    z-index: 40;
+    overflow: hidden;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.12);
+}
+
+/* close button */
+.project--closeBtn{
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-family: var(--primaryFont);
+    border: none;
+    background: rgba(0,0,0,0.06);
+    color: inherit;
+    cursor: pointer;
 }
+
+.project--descContent{
+    padding-right: 8px; /* space for scrollbar */
+    overflow-y: auto;
+    max-height: calc(100% - 10px);
+}
+
+/* scrollbar tweaks */
+.singleProject .project--desc::-webkit-scrollbar { width: 8px; }
+.singleProject .project--desc::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.28); border-radius: 8px; }
   
-.singleProject:hover .project--desc{
-    transform: translate(-2%,40%);
+.singleProject.open .project--desc{
+    left: 6%;
+    opacity: 1;
+    pointer-events: auto;
 }
+
+/* ensure languages panel stays above description */
+.singleProject .project--lang{ z-index: 70; }
+
   
 .singleProject .project--lang{
     position: absolute;
     bottom: 20px;
     right: 0;
     width: 140px;
-    font-size: 0.8rem;
+    font-size: 0.85rem;
     display: flex;
     justify-content: center;
     gap: 0.5rem;
@@ -94,9 +141,10 @@
     transform: translateX(100%);
     transition: transform 0.5s 0.3s;
     padding: 0.825rem;
+    z-index: 6;
 }
   
-.singleProject:hover .project--lang{
+.singleProject.open .project--lang{
     transform: translateX(0);
 }
 
@@ -105,4 +153,20 @@
     font-weight: 500;
     word-break: break-word; 
     line-height: 100%;
+}
+
+/* Responsive tweaks */
+@media screen and (max-width: 992px) {
+    .singleProject { width: 360px; height: 380px; }
+    .projectContent > h2 { font-size: 1.25rem; -webkit-line-clamp: 2; }
+}
+
+@media screen and (max-width: 600px) {
+    .singleProject { width: 90%; height: auto; padding-bottom: 3.5rem; }
+    .projectContent > h2 { font-size: 1.1rem; }
+    /* mobile: details shown only when card has .open class */
+    .singleProject .project--desc { position: relative; left: auto; opacity: 0; pointer-events: none; width: 100%; border-radius: 10px; max-height: none; box-shadow: none; margin-top: 0.75rem; overflow: visible; display: none; }
+    .singleProject.open .project--desc { display: block; opacity: 1; pointer-events: auto; }
+    .singleProject .project--lang { display: none; transform: none; }
+    .singleProject.open .project--lang { display: flex; transform: none; }
 }

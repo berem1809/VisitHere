@@ -6,35 +6,46 @@ import five from '../assets/svg/projects/five.svg'
 import six from '../assets/svg/projects/six.svg'
 import seven from '../assets/svg/projects/seven.svg'
 import eight from '../assets/svg/projects/eight.svg'
+import nine from '../assets/svg/projects/nine.svg'
+import ten from '../assets/svg/projects/ten.svg'
 
 
 export const projectsData = [
     {
         id: 1,
-        projectName: 'RetailX - Full-Stack E-commerce Platform',
-        projectDesc: 'A secure e-commerce platform with authentication, product management, shopping cart, checkout, order tracking, admin tooling, notifications, search, and strong security.',
-        tags: ['React', 'TypeScript', 'Redux Toolkit', 'Spring Boot 3', 'MySQL', 'AWS S3', 'Stripe', 'Redis', 'Docker'],
-        code: '',
-        demo: '',
-        image: one
+        projectName: 'AI-Knowledge-Hub',
+        projectDesc: 'Developed a secure personal knowledge management app that allows users to store, organize, and intelligently query notes, leveraging OpenAI-powered search and summarization to enable advanced content understanding, faster retrieval, and improved productivity.',
+        tags: ['DynamoDB', 'Next.js', 'Node.js (TypeScript)', 'AWS Cognito', 'OpenAI GPT', 'Docker'],
+        code: 'https://github.com/berem1809/AI-Knowledge-Hub',
+        // demo: '',
+        image: two
     },
     {
         id: 2,
-        projectName: 'BeautiQ - Beauty Appointment Management',
-        projectDesc: 'Centralized booking and scheduling for beauty services with responsive UI, appointment workflows, and push notifications.',
-        tags: ['MongoDB Atlas', 'ExpressJS', 'React', 'NodeJS', 'Material UI', 'AWS S3', 'AWS EC2', 'Docker'],
-        code: '',
-        demo: '',
+        projectName: 'BeautiQ- Centralized Beauty Appointment Management System ',
+        projectDesc: 'Built a centralized beauty services platform enabling seamless booking, secure payments, and real-time interactions. The system supports multiple user roles with tailored dashboards and delivers a smooth, reliable scheduling experience while ensuring production-ready scalability and security.',
+        tags: ['MongoDB Atlas', 'ExpressJS', 'ReactJS + Vite', 'NodeJS', 'Material UI', 'AWS S3', 'AWS EC2', 'Docker', 'CI/CD', 'AWS Lambda'],
+        code: 'https://github.com/orgs/BeautiQ-Web-Development/repositories',
+        // demo: '',
         image: two
     },
     {
         id: 3,
-        projectName: 'ROMODO - Fleet Routing System',
-        projectDesc: 'Fleet management platform for route allocation and real-time tracking with dashboards and reporting features.',
-        tags: ['MongoDB', 'ExpressJS', 'React', 'TypeScript', 'NodeJS', 'Firebase', 'CI/CD'],
-        code: '',
-        demo: '',
+        projectName: 'ROMODO-FleetRoutingSystem',
+        projectDesc: 'Developed a fleet management platform enabling efficient route allocation and real-time vehicle tracking to optimize operations. Built driver and passenger mobile apps with Google Maps API integration, interactive dashboards, reporting tools, and in-app communication channels. Streamlined operational workflows to enhance service reliability, improve user experience, and provide actionable in sights through comprehensive reporting.',
+        tags: ['MongoDB', 'ExpressJS', 'React + TypeScript', 'NodeJS', 'Flutter', 'Firebase', 'CI/CD'],
+        code: 'https://github.com/orgs/My-Romodo/repositories',
+        // demo: '',
         image: three
+    },
+    {
+        id: 4,
+        projectName: 'MirthMath_Calculator',
+        projectDesc: 'This is a simple calculator. It is called as MirthMath Calculator.The simplified version of the MirthMath Calculator comes with addition, subtraction, division, and multiplication functions. This makes it perfect for anyone looking to perform basic arithmetic calculations easily and quickly.',
+        tags: ['React', 'Vite', 'Javascript', 'CSS'],
+        code: 'https://github.com/berem1809/MirthMath_Calculator',
+        // demo: '',
+        image: ten
     }
 ]
 

@@ -158,10 +158,56 @@
     }
 }
 
+/* View All modal */
+.skillsHeader{ gap: 1rem }
+.skills--viewAll{
+    background: transparent;
+    border: 2px solid var(--primaryColor, #6c63ff);
+    color: var(--primaryColor, #6c63ff);
+    padding: 0.4rem 0.8rem;
+    border-radius: 20px;
+    cursor: pointer;
+    font-family: var(--primaryFont);
+    font-weight: 600;
+}
+
+.skillsModal{
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.35);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+}
+
+.skillsModalContent{
+    width: min(1100px, 92%);
+    max-height: 80vh;
+    overflow: auto;
+    border-radius: 12px;
+    padding: 1.2rem 1.2rem 2rem 1.2rem;
+    box-shadow: 0 12px 40px rgba(0,0,0,0.2);
+}
+
+.skillsModalHeader{ display:flex; align-items:center; justify-content:space-between; margin-bottom:1rem }
+.skillsModalClose{ background:transparent; border:none; font-size:1.4rem; cursor:pointer }
+
+.skillsGrid{
+    display:grid;
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: 1rem 1rem;
+    padding: 0.5rem;
+}
+
+@media screen and (max-width: 600px){
+    .skill--box { width: 120px; height: 120px }
+    .skill--box img{ width: 50px; height: 50px }
+}
+
 @media screen and (max-width: 400px) {
 
-}
-  
+}  
 @media only screen and (min-device-width: 320px) and (max-device-width: 
   480px) and (-webkit-device-pixel-ratio: 2) and (device-aspect-ratio: 2/3) {
 

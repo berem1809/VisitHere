@@ -40,7 +40,13 @@ import ruby from '../assets/svg/skills/ruby.svg'
 import swift from '../assets/svg/skills/swift.svg'
 import adobeaudition from '../assets/svg/skills/adobeaudition.svg'
 import aws from '../assets/svg/skills/aws.svg'
+import awss3 from '../assets/svg/skills/awss3.png'
+import awslambdaImg from '../assets/svg/skills/awslambda.png'
+import ec2instance from '../assets/svg/skills/ec2instance.png'
+import cognitoImg from '../assets/svg/skills/cognito.png'
 import deno from '../assets/svg/skills/deno.svg'
+import dynamodbImg from '../assets/svg/skills/dynamodb.png'
+import expressImg from '../assets/svg/skills/expressjs.png'
 import django from '../assets/svg/skills/django.svg'
 import firebase from '../assets/svg/skills/firebase.svg'
 import gimp from '../assets/svg/skills/gimp.svg'
@@ -73,11 +79,15 @@ import sketch from '../assets/svg/skills/sketch.svg'
 import unity from '../assets/svg/skills/unity.svg'
 import wolframalpha from '../assets/svg/skills/wolframalpha.svg'
 
+import openaiImg from '../assets/svg/skills/Openai.png'
+import nodeImg from '../assets/svg/skills/node.png'
+import kubernetesImg from '../assets/svg/skills/kubernets.png'
+
 import canva from '../assets/svg/skills/canva.svg'
 
 
 export const skillsImage = (skill) => {
-    const skillID = skill.toLowerCase();
+    const skillID = skill.toLowerCase().trim();
     switch (skillID) {
         case 'gcp':
             return gcp;
@@ -127,7 +137,13 @@ export const skillsImage = (skill) => {
             return mysql;
         case 'postgresql':
             return postgresql;
+        case 'dynamodb':
+            return aws;
+        case 'dynamo db':
+            return aws;
         case 'tailwind':
+            return tailwind;
+        case 'tailwindcss':
             return tailwind;
         case 'vitejs':
             return vitejs;
@@ -145,6 +161,8 @@ export const skillsImage = (skill) => {
             return go;
         case 'java':
             return java;
+        case 'spring boot':
+            return java;
         case 'kotlin':
             return kotlin;
         case 'julia':
@@ -159,10 +177,28 @@ export const skillsImage = (skill) => {
             return ruby;
         case 'swift':
             return swift;
+        case 'node js':
+        case 'nodejs':
+        case 'node':
+            return nodeImg;
         case 'adobe audition':
             return adobeaudition;
         case 'aws':
             return aws;
+        case 'aws ec2':
+        case 'ec2':
+            return ec2instance;
+        case 'aws s3':
+        case 'amazon s3':
+            return awss3;
+        case 'aws lambda':
+            return awslambdaImg;
+        case 'aws cognito':
+        case 'cognito':
+            return cognitoImg;
+        // case 'dynamodb':
+        case 'aws dynamodb':
+            return dynamodbImg;
         case 'deno':
             return deno;
         case 'django':
@@ -199,10 +235,18 @@ export const skillsImage = (skill) => {
             return webix;
         case 'wordpress':
             return wordpress;
+        case 'openai':
+            return openaiImg;
         case 'azure':
             return azure;
         case 'blender':
             return blender;
+        case 'kubernetes':
+        case 'k8s':
+            return kubernetesImg;
+        case 'expressjs':
+        case 'express js':
+            return expressImg;
         case 'fastify':
             return fastify;
         case 'figma':
